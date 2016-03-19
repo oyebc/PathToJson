@@ -11,15 +11,17 @@ import java.util.Map;
 /**
  * @author Pelumi<pelumi@maven.ai>
  *         Created on 18/03/16 at 18:43.
+ *
+ * A directory node represents a directory containing a list of other directories
  */
 
 @JsonSerialize(using = CustomSerializer.class)
-public class TreeNode implements Serializable {
+public class DirTreeNode implements Serializable {
 
     private String name;
-    private Map<TreeNode, TreeNode> children;
+    private Map<DirTreeNode, DirTreeNode> children;
 
-    public TreeNode(String name) {
+    public DirTreeNode(String name) {
         this.name = name;
         this.children = new HashMap<>();
     }
@@ -28,18 +30,21 @@ public class TreeNode implements Serializable {
         return name;
     }
 
-    public Collection<TreeNode> getChildren() {
+    public Collection<DirTreeNode> getChildren() {
         return children.values();
     }
 
-    public TreeNode addOrGetNodeWithName(String child){
-        TreeNode childNode = null;
-        TreeNode keyNode = new TreeNode(child);
+    /**
+     * This is the crux of this code. Add a new node to the tree or retrieve node head if existing.
+     */
+    public DirTreeNode addOrGetNodeWithName(String child){
+        DirTreeNode childNode = null;
+        DirTreeNode keyNode = new DirTreeNode(child);
 
         if (this.children.containsKey(keyNode)){
            childNode = this.children.get(keyNode);
         } else {
-            childNode = new TreeNode(child);
+            childNode = new DirTreeNode(child);
             this.children.put(keyNode, childNode);
         }
         return childNode;
@@ -53,9 +58,9 @@ public class TreeNode implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TreeNode treeNode = (TreeNode) o;
+        DirTreeNode dirTreeNode = (DirTreeNode) o;
 
-        return name.equals(treeNode.name);
+        return name.equals(dirTreeNode.name);
     }
 
     @Override

@@ -11,10 +11,10 @@ import java.io.IOException;
  *         Created on 18/03/16 at 22:28.
  */
 
-public class CustomSerializer extends JsonSerializer<TreeNode> {
+public class CustomSerializer extends JsonSerializer<DirTreeNode> {
 
     //feel free to serialise in whatever way you deem fit here
-    public void serialize(TreeNode value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(DirTreeNode value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
         if (value.getChildren().size() == 1)
             //if it's a single child, just add as a jsonobject not a json array
