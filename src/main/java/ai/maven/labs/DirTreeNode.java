@@ -19,6 +19,8 @@ import java.util.Map;
 public class DirTreeNode implements Serializable {
 
     private String name;
+    //the map of the node to node is an hack to help retrieve an existing node in O(1) time.
+    //there is an interesting conversation around it here: http://stackoverflow.com/questions/7283338/getting-an-element-from-a-set
     private Map<DirTreeNode, DirTreeNode> children;
 
     public DirTreeNode(String name) {

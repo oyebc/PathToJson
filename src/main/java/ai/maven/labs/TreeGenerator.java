@@ -42,7 +42,7 @@ public class TreeGenerator {
         if (args.length < 2) {
             log.warn("Output file not provided. Output will be written to: {}", OUTPUT_FILE);
         } else
-            OUTPUT_FILE = args[2];
+            OUTPUT_FILE = args[1].endsWith(".json") ? args[1] : args[1] + ".json";
 
         DirTreeNode treeNode = new DirTreeNode(ROOT_DIR);
 
