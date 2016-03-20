@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,6 +76,11 @@ public class TreeGenerator {
 
         String output = JSONUtils.toJSON(treeNode);
         log.debug(output);
+        File yourFile = new File(OUTPUT_FILE);
+        if(!yourFile.exists()) {
+            yourFile.createNewFile();
+        }
+
         Files.write(Paths.get(OUTPUT_FILE), output.getBytes(), StandardOpenOption.WRITE);
 
         log.info("All paths processed. Output written to file: {}. Total lines processed: {}.", OUTPUT_FILE, currentLine);
