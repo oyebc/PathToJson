@@ -50,7 +50,9 @@ public class TreeGenerator {
         log.info("Processing paths in file: {}", args);
         int currentLine = 0;
         BufferedReader br = new BufferedReader(new FileReader(args[0]));
+        String [] test_paths = {"/foo/par/tar","/foo/tar/bar","/root/dev/bar"};
         for (String path; (path = br.readLine()) != null; ) {
+//        for (String path: test_paths){
             currentLine++;
             path = path.trim();
             if (path.isEmpty()) {
@@ -75,6 +77,7 @@ public class TreeGenerator {
         }
 
         String output = JSONUtils.toJSON(treeNode);
+        System.out.println(output);
         log.debug(output);
         File yourFile = new File(OUTPUT_FILE);
         if(!yourFile.exists()) {
